@@ -9,7 +9,7 @@ function addToCart(userId, order){
     'order': order,
     'userid': userId,
     'purchased': false,
-    'date': '2025-04-27'
+    'date': formatDateForDB(new Date().toLocaleDateString())
   });
 }
 
@@ -17,7 +17,7 @@ function purchaseCart(userId){
   return knex('carts').where('userid', userId).where('purchased', false).update({
     'purchased': true,
     'userid': userId,
-    'date': new Date().toLocaleString()
+    'date': formatDateForDB(new Date().toLocaleDateString())
   });
 }
 
@@ -33,6 +33,10 @@ function getOrderHistory(userId){
   return knex('carts').where('userid', userId).where('purchased', true).select('id', 'order', 'date');
 }
 
+function formatDateForDB(date){
+  let arrDate = date.split('/');
+  return `${arrDate[2]}-${arrDate[1]}-${arrDate[0]}`;
+}
 export default {
   getCart,
   addToCart,
