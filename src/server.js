@@ -197,6 +197,7 @@ app.get('/api/products', async (req, res) => {
   const offset = (page - 1 ) * limit;
   const price = req.query.price;
   const category = req.query.category;
+  const name = req.query.name;
 
   if(price){
     const products = await productdb.getProductByPrice(price);
@@ -221,6 +222,18 @@ app.get('/api/products', async (req, res) => {
       products: parsedProducts,
       total_products: parsedProducts.length
     });
+  }
+  else if(name){
+    const products = await productdb.getProductByName(name);
+    const parsedProducts = products.map(product => ({
+      ...product,
+      tags: JSON.parse(product.tags),
+      reviews: JSON.parse(product.reviews),
+    }));
+    res.status(200).json({
+      products: parsedProducts,
+      total_products: parsedProducts.length,
+    })
   }
   else{
     const products = await productdb.getAllProducts(limit, offset);

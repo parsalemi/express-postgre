@@ -15,10 +15,14 @@ function getProductByPrice(acsORdesc){
 function getProductsByCategory(category){
   return knex('products').where('category', category).select('*');
 }
+function getProductByName(product){
+  return knex('products').select('*').where('name', 'ilike', `%${product}%`);
+}
 
 export default {
   getAllProducts,
   getProductById,
   getProductByPrice,
   getProductsByCategory,
+  getProductByName,
 }
