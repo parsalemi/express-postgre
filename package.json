@@ -5,8 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
     "migrate": "knex migrate:latest",
-    "start": "cross-env NODE_ENV=production node src/server.js"
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "docker:up": "docker-compose up -d --build",
+    "docker:down": "docker-compose down -v",
+    "docker:clean": "docker volume prune -f"
   },
   "nodemonConfig": {
     "delay": 0
