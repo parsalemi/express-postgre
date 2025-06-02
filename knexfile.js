@@ -1,18 +1,29 @@
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({path: `.env.${process.env.NODE_ENV}`});
+
+const is_docker = process.env.IS_DOCKER === 'true';
 
 const development = {
   client: 'postgresql',
-  connection: {
-    host: 'localhost',
+  connection: !is_docker ? {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  } : {
+    host: 'db',
     port: 5432,
-    user: 'postgres',
-    password: 'Ps248621379',
-    database: 'portfoliodb1',
+    user: 'dockeruser',
+    password: 'dockerpassword',
+    database: 'dockerdb',
   },
   migrations: {
     directory: './db/migrations',
     tableName: 'knex_migrations'
+  },
+  seeds: {
+    directory: './db/seeds',
   },
   pool: {
     min: 2,
@@ -31,6 +42,9 @@ const production = {
   migrations: {
     directory: './db/migrations',
     tableName: 'knex_migrations'
+  },
+  seeds: {
+    directory: './db/seeds'
   },
   pool: {
     min: 2,
