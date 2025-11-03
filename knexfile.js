@@ -5,18 +5,18 @@ const is_docker = process.env.IS_DOCKER === 'true';
 
 const development = {
   client: 'postgresql',
-  connection: !is_docker ? {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+  connection: is_docker ? {
+    host: process.env.DOCKER_DB_HOST || process.env.DB_HOST,
+    port: process.env.DOCKER_DB_PORT || process.env.DB_PORT,
+    user: process.env.DOCKER_DB_USER || process.env.DB_USERNAME || process.env.DB_USER,
+    password: process.env.DOCKER_DB_PWD || process.env.DB_PASSWORD,
+    database: process.env.DOCKER_DB_NAME || process.env.DB_NAME,
   } : {
-    host: process.env.DOCKER_DB_HOST,
-    port: process.env.DOCKER_DB_PORT,
-    user: process.env.DOCKER_DB_USER,
-    password: process.env.DOCKER_DB_PWD,
-    database: process.env.DOCKER_DB_NAME
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME || process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
   },
   migrations: {
     directory: './db/migrations',
