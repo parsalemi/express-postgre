@@ -12,11 +12,11 @@ const development = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
   } : {
-    host: 'db',
-    port: 5432,
-    user: 'dockeruser',
-    password: 'dockerpassword',
-    database: 'dockerdb',
+    host: process.env.DOCKER_DB_HOST,
+    port: process.env.DOCKER_DB_PORT,
+    user: process.env.DOCKER_DB_USER,
+    password: process.env.DOCKER_DB_PWD,
+    database: process.env.DOCKER_DB_NAME
   },
   migrations: {
     directory: './db/migrations',
