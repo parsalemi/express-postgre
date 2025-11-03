@@ -373,4 +373,6 @@ app.get('/api/:userid/order-history', async (req, res) => {
   res.status(200).json(parsedOrders)
 });
 
-app.listen(process.env.PORT, () => console.log(`server is in port ${process.env.PORT} and in ${process.env.NODE_ENV} mode. Allowed origin is ${process.env.CORS_ORIGIN}`))
+app.listen(process.env.PORT || 8000, '0.0.0.0',
+  () => console.log(`server is in port ${process.env.PORT} and in ${process.env.NODE_ENV} mode. Allowed origin is ${process.env.CORS_ORIGIN}`)
+)

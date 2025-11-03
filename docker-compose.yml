@@ -8,9 +8,6 @@ services:
     environment:
       - IS_DOCKER=true
       - NODE_ENV=production
-      - CORS_ORIGIN=https://parsalemi.github.io
-      - captchaSecretKey=6LcZzRUrAAAAAET-GzQ8C86-CVF3EqRDQroQBtuG
-      - token=bae536690b9e9bd3a3fbff0696ea5398cc66f505cd092bb617234da09c1ae9aebae43ac87a2d3f93e7d4b39d585177172b13be1a2ea790f0ccfb861cc70fa306
       - PORT=8000
       - DOCKER_DB_NAME=dockerdb
       - DOCKER_DB_PORT=5432
