@@ -8,6 +8,11 @@ services:
     environment:
       - IS_DOCKER=true
       - NODE_ENV=development
+      - DOCKER_DB_NAME=dockerdb
+      - DOCKER_DB_PORT=5432
+      - DOCKER_DB_USER=dockeruser
+      - DOCKER_DB_PWD=dockerpassword
+      - DOCKER_DB_HOST=db
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
