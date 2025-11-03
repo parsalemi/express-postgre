@@ -11,7 +11,9 @@
     "seed": "knex seed:run",
     "docker:up": "docker-compose up -d --build",
     "docker:down": "docker-compose down -v",
-    "docker:clean": "docker volume prune -f"
+    "docker:clean": "docker volume prune -f",
+    "docker:up:prod": "docker compose up -d --build",
+    "docker:down:prod": "docker compose down -v"
   },
   "nodemonConfig": {
     "delay": 0
